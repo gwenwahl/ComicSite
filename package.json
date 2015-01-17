@@ -1,0 +1,27 @@
+{
+  "name": "HoleyStonesComic",
+  "version": "1.0.0",
+  "description": "This is the code for the Holey Stones comic site",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gwenwahl/ComicSite"
+  },
+  "author": "Gwendolyn Wahl, Jillian Wahl",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gwenwahl/ComicSite/issues"
+  },
+  "homepage": "https://github.com/gwenwahl/ComicSite",
+  "dependencies": {
+    "express": "^4.11.0",
+    "jade": "^1.9.0",
+    "logger": "0.0.1",
+    "mongoose": "^3.8.21",
+    "nib": "^1.0.4",
+    "stylus": "^0.49.3"
+  }
+}

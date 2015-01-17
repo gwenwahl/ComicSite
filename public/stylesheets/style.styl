@@ -1,0 +1,61 @@
+/*
+ * Import nib
+ */
+@import 'nib'
+
+/*
+ * Grab a custom font from Google
+ */
+@import url('http://fonts.googleapis.com/css?family=Quicksand')
+
+/*
+ * Nib provides a CSS reset
+ */
+global-reset()
+
+/*
+ * Store the main color and
+ * background color as variables
+ */
+header-color = #fdf5e6
+background-color = #cdf3b0
+text-color = #362819
+
+body
+  font-family: 'IM Fell Great Primer'
+  background-color background-color
+  color text-color
+
+header
+  font-family 'IM Fell Great Primer'
+  padding 50px 10px
+  color text-color
+  font-size 36px
+  text-align center
+
+  /*
+   * Note the use of the `main-color`
+   * variable and the `darken` function
+   */
+  background-color header-color
+
+
+.container
+  width auto
+  margin 50px auto
+  overflow hidden
+
+.main-content
+  float left
+  width 60%
+
+.adBox
+  float left
+  width 20%
+
+footer
+  width auto
+  margin 50px auto
+  border-top 1px dotted #ccc
+  padding-top 5px
+  font-size 13px
