@@ -3,20 +3,42 @@
 
 extend layout
 
-block sidebarLeft
+//block sidebarLeft
    p
       | ad goes here
 
 block content
    h1
       | UNDER CONSTRUCTION
+   img(src="/images/holeystones001.jpg").comic
+   .navBar
+      img(src='/images/navbuttons.png', border='0', width='1800', height='300', orgwidth='1800', orgheight='300', usemap='#image-maps-2015-01-17-162831', alt='')#navBarImage
+      map#ImageMapsCom-image-maps-2015-01-17-162831(name='image-maps-2015-01-17-162831')
+         area#backButton(alt='', title='Back', href='', shape='rect', coords='434,132,545,242', style='outline:none;', target='_self')
+         area#firstButton(alt='', title='First', href='', shape='rect', coords='44,136,210,261', style='outline:none;', target='_self')
+         area#archiveButton(alt='', title='Archive', href='', shape='rect', coords='728,59,1112,273', style='outline:none;', target='_self')
+         area#nextButton(alt='', title='Next', href='', shape='rect', coords='1266,132,1376,242', style='outline:none;', target='_self')
+         area#latestButton(alt='', title='Latest', href='', shape='rect', coords='1600,139,1766,263', style='outline:none;', target='_self')
+         area(shape='rect', coords='1798,298,1800,300', alt='Image Map', style='outline:none;', title='Image Map', href='http://www.image-maps.com/index.php?aff=mapped_users_0')
 
+   .comicText
+      p
+         | Comic text will go here
+   .commentSection
+      #disqus_thread.commentBox
+      script.
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'holeystonescomic'; // required: replace example with your forum shortname
+            var disqus_identifier = 'holeystones001.jpg';
 
-block sidebarRight
-   .adBox#rightAds
-      p
-         | Sed auctor neque eu tellus rhoncus ut
-         | eleifend nibh porttitor. Ut in nulla enim.
-      p
-         | Vivamus hendrerit arcu sed erat molestie
-         | vehicula.
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+      noscript Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+
+//block sidebarRight
+   p.
+      ad goes here
