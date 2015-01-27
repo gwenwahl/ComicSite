@@ -11,6 +11,7 @@ var   express    = require('express')
     , bodyParser = require('body-parser')
     , mysql      = require('mysql')
     , sha256     = require('sha256')
+    , multer     = require('multer')
     , nib        = require('nib');
 
 var app = express();
@@ -29,6 +30,21 @@ var config = {
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
+
+//File upload logic
+var done        =    false;
+app.use(multer({ dest: './public/images/comics',
+    rename: function (fieldname, filename) {
+        return filename;
+    },
+    onFileUploadStart: function (file) {
+        console.log(file.originalname + ' is starting ...')
+    },
+    onFileUploadComplete: function (file) {
+        console.log(file.fieldname + ' uploaded to  ' + file.path)
+        done=true;
+    }
+}));
 app.use(bodyParser.json() );        // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
@@ -83,6 +99,32 @@ app.get('/login', function (req, res) {
     res.render('login', {
         error : err
     });
+});
+
+app.get('/admin', function (req, res) {
+    res.redirect('/login');
+});
+
+app.post('/UploadFiles', function(req,res){
+    console.log('request received');
+    if(done==true){
+        console.log(req.files);
+        console.log(req.body);
+        var connection = mysql.createConnection(config);
+        //Insert data into the database
+        var comicNum = req.body.comicNum,
+            comicDate = req.body.comicDate,
+            comicText = req.body.comicText,
+            comicUrl  = req.files.userPhoto.path;
+
+        var insertQuery = "INSERT INTO Comics (Comic_Number, Comic_URL, Uploaded_Date, Display_Date, Comic_Text) " +
+                          "VALUES ('"+comicNum+"', '"+comicUrl+"', NOW(), '"+comicDate+"', '"+comicText+"')";
+        console.log(insertQuery);
+        connection.query(insertQuery, function (err) {
+            if (err) throw err;
+            res.end("File uploaded.");
+        });
+    }
 });
 
 app.listen(80, function () {

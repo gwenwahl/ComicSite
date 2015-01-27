@@ -110,15 +110,15 @@ body {
 }
 header {
   font-family: 'IM Fell Great Primer';
-  padding: 50px 10px;
   color: #362819;
   font-size: 36px;
   text-align: center;
+  height: 145px;
 /*
    * Note the use of the `main-color`
    * variable and the `darken` function
    */
-  background-color: #fdf5e6;
+  background-color: #cdf3b0;
 }
 /*
 @media screen and (min-width : 1000px)
@@ -165,6 +165,17 @@ header {
   background-color: #fff;
   padding: 15px;
 }
+#headerImg {
+  width: 93%;
+  height: 100%;
+  display: inline-block;
+  margin: auto;
+  border: 1px solid #fff solid 3px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  background-color: #fff;
+  padding: 7px;
+}
 .commentSection {
   background-color: #fff;
   -webkit-border-radius: 25px;
@@ -172,12 +183,40 @@ header {
   width: 94%;
   display: block;
   margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .commentBox {
   width: 95%;
   padding: 15px;
   display: block;
   margin: auto;
+}
+.comicText {
+  background-color: #fff;
+  -webkit-border-radius: 25px;
+  border-radius: 25px;
+  width: 94%;
+  display: block;
+  margin: auto;
+}
+.comicTextInside {
+  font-size: 16px;
+  white-space: nowrap;
+  width: 65%;
+  margin: auto;
+  display: block;
+  padding: 10px;
+}
+.wordwrap {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.comicTextInside h1 {
+  font-size: 20px;
 }
 #navBarImage {
   width: 100%;
@@ -204,6 +243,7 @@ header {
 .HolyGrail-body {
   width: 900px;
   margin: auto;
+  padding-top: 35px;
 }
 .HolyGrail-left {
   -webkit-box-ordinal-group: -1;

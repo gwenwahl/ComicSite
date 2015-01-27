@@ -2,3 +2,32 @@
    Created by Gwen on 1/26/15.
 
 extend layout
+
+
+block content
+    h1 File upload test
+    form#uploadForm(enctype='multipart/form-data', action='/UploadFiles', method='post')
+        input(type='number', name='comicNum', placeholder='Comic Number')
+        br
+        input(type='date', name='comicDate')
+        br
+        textarea(rows='4' cols='50' name='comicText') Comic Text Here
+        br
+        input(type='file', name='userPhoto')
+        br
+        input(type='submit', value='Upload Image', name='submit')
+    script.
+            $(document).ready(function() {
+                $('#uploadForm').submit(function() {
+            $(this).ajaxSubmit({
+            error: function(xhr) {
+            status('Error: ' + xhr.status);
+            },
+            success: function(response) {
+            console.log(response);
+            }
+            });
+            //Very important line, it disable the page refresh.
+            return false;
+            });
+            });

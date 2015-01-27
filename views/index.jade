@@ -8,9 +8,7 @@ extend layout
       | ad goes here
 
 block content
-   h1
-      | UNDER CONSTRUCTION
-   img(src="/images/holeystones001.jpg").comic
+   img(src="/images/comics/holeystones001.jpg").comic
    .navBar
       img(src='/images/navbuttons.png', border='0', width='1800', height='300', orgwidth='1800', orgheight='300', usemap='#image-maps-2015-01-17-162831', alt='')#navBarImage
       map#ImageMapsCom-image-maps-2015-01-17-162831(name='image-maps-2015-01-17-162831')
@@ -22,8 +20,10 @@ block content
          area(shape='rect', coords='1798,298,1800,300', alt='Image Map', style='outline:none;', title='Image Map', href='http://www.image-maps.com/index.php?aff=mapped_users_0')
 
    .comicText
-      p
-         | Comic text will go here
+       .comicTextInside.wordwrap
+            h1 Page 1
+            h1 ------
+            p Test text is test Test text is test Test text is test Test text is test Test text is test Test text is test Test text is test Test text is test
    .commentSection
       #disqus_thread.commentBox
       script.

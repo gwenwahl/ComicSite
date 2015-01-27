@@ -28,16 +28,16 @@ body
 
 header
   font-family 'IM Fell Great Primer'
-  padding 50px 10px
   color text-color
   font-size 36px
   text-align center
+  height 145px
 
   /*
    * Note the use of the `main-color`
    * variable and the `darken` function
    */
-  background-color header-color
+  background-color background-color
 
 
 
@@ -85,18 +85,57 @@ header
   background-color white
   padding 15px
 
+#headerImg
+  width 93%
+  height 100%
+  display inline-block
+  margin auto
+  border white solid 3px
+  border-radius 15px
+  background-color #ffffff
+  padding 7px
+
 .commentSection
   background-color white
   border-radius 25px
   width 94%
   display block
   margin auto
+  margin-top 20px
+  margin-bottom 20px
 
 .commentBox
   width 95%
   padding 15px
   display block
   margin auto
+
+
+.comicText
+  background-color #ffffff
+  border-radius 25px
+  width 94%
+  display block
+  margin auto
+
+.comicTextInside
+  font-size 16px
+  white-space nowrap
+  width 65%
+  margin auto
+  display block
+  padding 10px
+
+.wordwrap
+  white-space pre-wrap      /* CSS3 */
+  white-space -moz-pre-wrap /* Firefox */
+  white-space -pre-wrap     /* Opera <7 */
+  white-space -o-pre-wrap   /* Opera 7 */
+  word-wrap break-word      /* IE */
+
+
+.comicTextInside h1
+  font-size 20px
 
 #navBarImage
   width 100%
@@ -114,6 +153,8 @@ header
 .HolyGrail-body
   width 900px
   margin auto
+  padding-top 35px
+
 
 .HolyGrail-left
   order -1
