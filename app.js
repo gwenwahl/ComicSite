@@ -58,9 +58,85 @@ app.use(stylus.middleware(
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (req, res) {
-    res.render('index',
-        { title : 'Home' }
-    );
+
+    var connection = mysql.createConnection(config);
+    //Let's get some navigation going on
+    if (req.query.comic) {
+        //Load specific comic, and navigation logic for it, also handle invalid requests
+        var specComicQuery = "SELECT * FROM Comics " +
+                             "WHERE NOW() > Display_Date " +
+                             "AND Comic_Number = '"+req.query.comic+"'";
+        connection.query(specComicQuery, function (err, comicRes) {
+            if (err) throw err;
+            if (comicRes.length > 0) {
+                //Determine previous comic
+                var prev = parseInt(comicRes[0].Comic_Number) - 1;
+                var next = prev + 2;
+                if (prev < 1) {
+                    //This is the first and last comic
+                    prev = '#';
+                } else {
+                    prev = '/?comic=' + prev;
+                }
+                //Check next comic
+                var nextQuery = "SELECT * FROM Comics " +
+                                "WHERE Comic_Number = '"+next+"' " +
+                                "AND NOW() > Display_Date";
+                connection.query(nextQuery, function (err, nextRes) {
+                    if (err) throw err;
+                    if (!nextRes) {
+                        next = '#';
+                    } else {
+                        next = '/?comic=' + next;
+                    }
+                });
+
+
+                res.render('index', {
+                    comicText  : comicRes[0].Comic_Text,
+                    comicTitle : comicRes[0].Comic_Title,
+                    comicURL   : comicRes[0].Comic_URL,
+                    nextComic  : next,
+                    prevComic  : prev,
+                    disqusID   : 'comic' + comicRes[0].Comic_Number
+                });
+            } else {
+                //Display 404
+                res.render('404');
+            }
+        });
+    } else {
+        //Load most recent comic, and navigation logic for it
+        var latestComicQuery = "SELECT * FROM Comics " +
+                               "WHERE NOW() > Display_Date " +
+                               "ORDER BY Comic_Number Desc " +
+                               "LIMIT 1";
+        connection.query(latestComicQuery, function (err, comicRes) {
+            //Consider rendering a 503 as well
+            if (err) throw err;
+            if (comicRes.length > 0) {
+                //Determine previous comic
+                var prev = parseInt(comicRes[0].Comic_Number) - 1;
+                if (prev < 1) {
+                    //This is the first and last comic
+                    prev = '#';
+                } else {
+                    prev = '/?comic=' + prev;
+                }
+                res.render('index', {
+                    comicText  : comicRes[0].Comic_Text,
+                    comicTitle : comicRes[0].Comic_Title,
+                    comicURL   : comicRes[0].Comic_URL,
+                    nextComic  : '#',
+                    prevComic  : prev,
+                    disqusID   : 'comic' + comicRes[0].Comic_Number
+                });
+            } else {
+                //Display 404
+                res.render('404');
+            }
+        });
+    }
 });
 
 app.post('/admin', function (req, res) {
@@ -112,19 +188,36 @@ app.post('/UploadFiles', function(req,res){
         console.log(req.body);
         var connection = mysql.createConnection(config);
         //Insert data into the database
-        var comicNum = req.body.comicNum,
-            comicDate = req.body.comicDate,
-            comicText = req.body.comicText,
-            comicUrl  = req.files.userPhoto.path;
+        var comicNum   = req.body.comicNum,
+            comicDate  = req.body.comicDate,
+            comicText  = req.body.comicText,
+            comicUrl   = req.files.userPhoto.path.substr(6),
+            comicTitle = req.body.comicTitle;
 
-        var insertQuery = "INSERT INTO Comics (Comic_Number, Comic_URL, Uploaded_Date, Display_Date, Comic_Text) " +
-                          "VALUES ('"+comicNum+"', '"+comicUrl+"', NOW(), '"+comicDate+"', '"+comicText+"')";
+        var insertQuery = "INSERT INTO Comics (Comic_Number, Comic_URL, Uploaded_Date, Display_Date, Comic_Text, Comic_Title) " +
+                          "VALUES ('"+comicNum+"', '"+comicUrl+"', NOW(), '"+comicDate+"', '"+comicText+"', '"+comicTitle+"')";
         console.log(insertQuery);
         connection.query(insertQuery, function (err) {
             if (err) throw err;
             res.end("File uploaded.");
         });
     }
+});
+
+app.get('/About', function (req, res) {
+    res.render('about');
+});
+
+app.get('/Archive', function (req, res) {
+    res.render('archive');
+});
+
+app.get('/Characters', function (req, res) {
+    res.render('characters');
+});
+
+app.get('/Links', function (req, res) {
+    res.render('links');
 });
 
 app.listen(80, function () {

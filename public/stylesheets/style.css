@@ -239,6 +239,7 @@ header {
   -ms-flex-direction: column;
   flex-direction: column;
   text-align: center;
+  min-height: 400px;
 }
 .HolyGrail-body {
   width: 900px;

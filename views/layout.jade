@@ -19,12 +19,12 @@ html
         header
             img#headerImg(src='/images/header.jpg', border='0', width='4000', height='500', orgwidth='4000', orgheight='500', usemap='#headerMap', alt='')
             map#headerMap(name='headerMap')
-                area#aboutBtn(alt='About', title='About', href='#', shape='rect', coords='186,332,594,500', style='outline:none;', target='_self')
-                area#characterBtn(alt='Characters', title='Characters', href='#', shape='rect', coords='1062,330,1841,500', style='outline:none;', target='_self')
-                area#archiveHeadBtn(alt='Archive', title='Archive', href='#', shape='rect', coords='2447,338,2992,500', style='outline:none;', target='_self')
-                area#linkBtn(alt='Links', title='Links', href='#', shape='rect', coords='3288,330,3718,500', style='outline:none;', target='_self')
-                area#homeBtn(alt='Holey Stones Comic', title='Holey Stones Comic', href='#', shape='rect', coords='0,0,3999,297', style='outline:none;', target='_self')
-                area(shape='rect', coords='3998,498,4000,500', alt='Image Map', style='outline:none;', title='Image Map', href='http://www.image-maps.com/index.php?aff=mapped_users_0')
+                area#aboutBtn(alt='About', title='About', href='./About', shape='rect', coords='186,332,594,500', style='outline:none;', target='_self')
+                area#characterBtn(alt='Characters', title='Characters', href='./Characters', shape='rect', coords='1062,330,1841,500', style='outline:none;', target='_self')
+                area#archiveHeadBtn(alt='Archive', title='Archive', href='./Archive', shape='rect', coords='2447,338,2992,500', style='outline:none;', target='_self')
+                area#linkBtn(alt='Links', title='Links', href='./Links', shape='rect', coords='3288,330,3718,500', style='outline:none;', target='_self')
+                area#homeBtn(alt='Holey Stones Comic', title='Holey Stones Comic', href='./', shape='rect', coords='0,0,3999,297', style='outline:none;', target='_self')
+                area(shape='rect', coords='3998,498,4000,500', alt='Image Map', style='outline:none;', title='Image Map')
         .HolyGrail-body
             main.HolyGrail-content
                 block content

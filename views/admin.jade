@@ -7,6 +7,8 @@ extend layout
 block content
     h1 File upload test
     form#uploadForm(enctype='multipart/form-data', action='/UploadFiles', method='post')
+        input(type='text', name='comicTitle', placeholder='Page Number/Title')
+        br
         input(type='number', name='comicNum', placeholder='Comic Number')
         br
         input(type='date', name='comicDate')
