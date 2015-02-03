@@ -76,7 +76,7 @@ app.get('/', function (req, res) {
                     //This is the first and last comic
                     prev = '#';
                 } else {
-                    prev = '/?comic=' + prev;
+                    prev = 'http://holeystonescomic.com/?comic=' + prev;
                 }
                 //Check next comic
                 var nextQuery = "SELECT * FROM Comics " +
@@ -84,24 +84,23 @@ app.get('/', function (req, res) {
                                 "AND NOW() > Display_Date";
                 connection.query(nextQuery, function (err, nextRes) {
                     if (err) throw err;
-                    if (!nextRes) {
+                    if (nextRes.length < 1) {
                         next = '#';
                     } else {
-                        next = '/?comic=' + next;
+                        next = 'http://holeystonescomic.com/?comic=' + next;
                     }
-                });
-
-
-                res.render('index', {
-                    comicText  : comicRes[0].Comic_Text,
-                    comicTitle : comicRes[0].Comic_Title,
-                    comicURL   : comicRes[0].Comic_URL,
-                    nextComic  : next,
-                    prevComic  : prev,
-                    disqusID   : 'comic' + comicRes[0].Comic_Number
+                    res.render('index', {
+                        comicText  : comicRes[0].Comic_Text,
+                        comicTitle : comicRes[0].Comic_Title,
+                        comicURL   : comicRes[0].Comic_URL,
+                        nextComic  : next,
+                        prevComic  : prev,
+                        disqusID   : sha256('comic' + comicRes[0].Comic_Number)
+                    });
                 });
             } else {
                 //Display 404
+                console.log("404 triggered");
                 res.render('404');
             }
         });
@@ -121,7 +120,7 @@ app.get('/', function (req, res) {
                     //This is the first and last comic
                     prev = '#';
                 } else {
-                    prev = '/?comic=' + prev;
+                    prev = 'http://holeystonescomic.com/?comic=' + prev;
                 }
                 res.render('index', {
                     comicText  : comicRes[0].Comic_Text,
@@ -129,7 +128,7 @@ app.get('/', function (req, res) {
                     comicURL   : comicRes[0].Comic_URL,
                     nextComic  : '#',
                     prevComic  : prev,
-                    disqusID   : 'comic' + comicRes[0].Comic_Number
+                    disqusID   : sha256('comic' + comicRes[0].Comic_Number)
                 });
             } else {
                 //Display 404
@@ -218,6 +217,10 @@ app.get('/Characters', function (req, res) {
 
 app.get('/Links', function (req, res) {
     res.render('links');
+});
+
+app.get('*', function (req, res) {
+   res.render('404');
 });
 
 app.listen(80, function () {
